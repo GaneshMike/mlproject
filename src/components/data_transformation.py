@@ -106,6 +106,7 @@ class DataTransformation:
             ]
             test_arr = np.c_[input_feature_test_arr, np.array(target_feature_test_df)]
             logging.info(f"Saved preprocessing object.")
+
             save_object(
                 file_path=self.data_transformation_config.preprocessor_obj_file_path,
                 obj=preprocessing_obj
@@ -117,3 +118,8 @@ class DataTransformation:
             )
         except Exception as e:
             raise CustomException(e,sys)
+
+
+if __name__ == "__main__":
+    transformation = DataTransformation()
+    train_arr, test_arr, _ = transformation.initiate_data_transformation(train_path, test_path)        
