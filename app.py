@@ -2,6 +2,7 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 from src.pipeline.predict_pipeline import CustomData, PredictPipeline
+from src.logger import logging
 
 # Page configuration
 st.set_page_config(
@@ -13,6 +14,8 @@ st.set_page_config(
 # App title and description
 st.title("Student Exam Performance Indicator")
 st.write("---")
+
+logging.info("Streamlit app started.")
 
 # Create main content
 st.subheader("Student Exam Performance Prediction")
@@ -80,6 +83,7 @@ if st.button("Predict Performance", use_container_width=True):
     # Validate inputs
     if not all([gender, race_ethnicity, parental_education, lunch, test_prep]):
         st.error("Please fill in all required fields!")
+        logging.warning("User did not fill all required fields.")
     else:
         try:
             # Create custom data object
@@ -92,13 +96,17 @@ if st.button("Predict Performance", use_container_width=True):
                 reading_score=float(reading_score),
                 writing_score=float(writing_score)
             )
+            logging.info(f"CustomData object created with: gender={gender}, race_ethnicity={race_ethnicity}, parental_level_of_education={parental_education}, lunch={lunch}, test_preparation_course={test_prep}, reading_score={reading_score}, writing_score={writing_score}")
             
             # Get data as dataframe
             pred_df = data.get_data_as_data_frame()
+            logging.info("CustomData converted to DataFrame for prediction.")
             
             # Make prediction
             predict_pipeline = PredictPipeline()
+            logging.info("PredictPipeline initialized.")
             result = predict_pipeline.predict(pred_df)
+            logging.info(f"Prediction completed. Result: {result}")
             
             # Display result
             st.success("Prediction completed!")
@@ -124,5 +132,6 @@ if st.button("Predict Performance", use_container_width=True):
                 
         except Exception as e:
             st.error(f"An error occurred during prediction: {str(e)}")        
+            logging.error(f"Error during prediction: {str(e)}")
 
 
