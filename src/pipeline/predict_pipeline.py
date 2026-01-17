@@ -3,7 +3,7 @@ import os
 
 import pandas as pd
 from src.exception import CustomException
-from src.logger import load_object
+from src.utils import load_object
 
 
 class PredictPipeline:
