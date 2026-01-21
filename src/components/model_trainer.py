@@ -112,8 +112,10 @@ class ModelTrainer:
             return r2_square     
         except Exception as e:
             raise CustomException(e,sys)
-if __name__ = "__main__":
-    # Model Training
-    trainer = ModelTrainer()
-    r2 = trainer.initiate_model_trainer(train_arr, test_arr)
-    print(f"Training complete. R2 score: {r2}")            
+        
+        
+# if __name__ = "__main__":
+#     # Model Training
+#     trainer = ModelTrainer()
+#     r2 = trainer.initiate_model_trainer(train_arr, test_arr)
+#     print(f"Training complete. R2 score: {r2}")            

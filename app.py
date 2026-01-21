@@ -129,6 +129,7 @@ if st.button("Predict Performance", use_container_width=True):
                 df_summary = pd.DataFrame(summary_data.items(), columns=["Field", "Value"])
                 df_summary["Value"] = df_summary["Value"].astype(str)
                 st.write(df_summary)
+                print("checking the data")
                 
         except Exception as e:
             st.error(f"An error occurred during prediction: {str(e)}")        
